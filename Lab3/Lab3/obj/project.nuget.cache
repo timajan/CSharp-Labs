@@ -1,0 +1,10 @@
+{
+  "version": 2,
+  "dgSpecHash": "dQUPylBpEMIN35arELv4UwhmJt9pKnmqx6O3z0222vXwsoAkL0ZkOVgpMjifBmHYyoOy4fkzK4/y1jDW542IHw==",
+  "success": true,
+  "projectFilePath": "C:\\Users\\Tima\\source\\repos\\C-sharp_labs\\Lab3\\Lab3\\Lab3.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\Tima\\.nuget\\packages\\newtonsoft.json\\13.0.3\\newtonsoft.json.13.0.3.nupkg.sha512"
+  ],
+  "logs": []
+}
