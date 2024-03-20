@@ -17,11 +17,11 @@ namespace SequenceAnalysis
         }
 
         // Checks if the sequence is strictly increasing
-        public bool IsIncreasing(List<int> sequence)
+        public bool IsIncreasing()
         {
-            for (int i = 1; i < sequence.Count; i++)
+            for (int i = 1; i < Numbers.Count; i++)
             {
-                if (sequence[i] <= sequence[i - 1])
+                if (Numbers[i] <= Numbers[i - 1])
                 {
                     return false;
                 }
@@ -30,11 +30,11 @@ namespace SequenceAnalysis
         }
 
         // Checks if the sequence is strictly decreasing
-        public bool IsDescending(List<int> sequence)
+        public bool IsDescending()
         {
-            for (int i = 1; i < sequence.Count; i++)
+            for (int i = 1; i < Numbers.Count; i++)
             {
-                if (sequence[i] >= sequence[i - 1])
+                if (Numbers[i] >= Numbers[i - 1])
                 {
                     return false;
                 }
@@ -43,11 +43,11 @@ namespace SequenceAnalysis
         }
 
         // Checks if the sequence is non-increasing (monotonically decreasing)
-        public bool IsNonIncreasing(List<int> sequence)
+        public bool IsNonIncreasing()
         {
-            for (int i = 1; i < sequence.Count; i++)
+            for (int i = 1; i < Numbers.Count; i++)
             {
-                if (sequence[i] > sequence[i - 1])
+                if (Numbers[i] > Numbers[i - 1])
                 {
                     return false;
                 }
@@ -56,11 +56,11 @@ namespace SequenceAnalysis
         }
 
         // Checks if the sequence is non-decreasing (monotonically increasing)
-        public bool IsNonDecreasing(List<int> sequence)
+        public bool IsNonDecreasing()
         {
-            for (int i = 1; i < sequence.Count; i++)
+            for (int i = 1; i < Numbers.Count; i++)
             {
-                if (sequence[i] <= sequence[i - 1])
+                if (Numbers[i] <= Numbers[i - 1])
                 {
                     return false;
                 }
@@ -69,14 +69,14 @@ namespace SequenceAnalysis
         }
 
         // Checks if the sequence is an arithmetic progression
-        public bool IsArithmeticProgression(List<int> sequence)
+        public bool IsArithmeticProgression()
         {
-            if (sequence.Count < 2) return false;
+            if (Numbers.Count < 2) return false;
 
-            int difference = sequence[1] - sequence[0];
-            for (int i = 2; i < sequence.Count; i++)
+            int difference = Numbers[1] - Numbers[0];
+            for (int i = 2; i < Numbers.Count; i++)
             {
-                if (sequence[i] - sequence[i - 1] != difference)
+                if (Numbers[i] - Numbers[i - 1] != difference)
                 {
                     return false;
                 }
@@ -85,14 +85,14 @@ namespace SequenceAnalysis
         }
 
         // Checks if the sequence is a geometric progression
-        public bool IsGeometricProgression(List<int> sequence)
+        public bool IsGeometricProgression()
         {
-            if (sequence.Count < 2 || sequence.Contains(0)) return false;
+            if (Numbers.Count < 2 || Numbers.Contains(0)) return false;
 
-            double ratio = (double)sequence[1] / sequence[0];
-            for (int i = 2; i < sequence.Count; i++)
+            double ratio = (double)Numbers[1] / Numbers[0];
+            for (int i = 2; i < Numbers.Count; i++)
             {
-                if ((double)sequence[i] / sequence[i - 1] != ratio)
+                if ((double)Numbers[i] / Numbers[i - 1] != ratio)
                 {
                     return false;
                 }
@@ -103,27 +103,27 @@ namespace SequenceAnalysis
         public List<string> GetTypeOfSequence()
         {
             List<string> types = new List<string>();
-            if (IsIncreasing(Numbers))
+            if (IsIncreasing())
             {
                 types.Add("Increasing");
             }
-            if (IsDescending(Numbers))
+            if (IsDescending())
             {
                 types.Add("Decreasing");
             }
-            if (IsNonIncreasing(Numbers))
+            if (IsNonIncreasing())
             {
                 types.Add("Non-Increasing");
             }
-            if (IsNonDecreasing(Numbers))
+            if (IsNonDecreasing())
             {
                 types.Add("Non-Decreasing");
             }
-            if (IsArithmeticProgression(Numbers))
+            if (IsArithmeticProgression())
             {
                 types.Add("Arithmetic Progression");
             }
-            if (IsGeometricProgression(Numbers))
+            if (IsGeometricProgression())
             {
                 types.Add("Geometric Progression");
             }
@@ -197,7 +197,7 @@ namespace SequenceAnalysis
                     }
                 }
             }
-
+             
             // Ensure we don't add an empty subsequence
             if (currentSubSequence.Count > 0)
             {
