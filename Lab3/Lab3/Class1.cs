@@ -10,10 +10,12 @@ namespace SequenceAnalysis
     public class Sequence
     {
         public List<int> Numbers { get; set; }
+        public List<List<int>> SubSequences { get; set; }
 
         public Sequence(List<int> numbers)
         {
             Numbers = numbers;
+            SubSequences = new List<List<int>>();
         }
 
         // Checks if the sequence is strictly increasing
@@ -55,6 +57,19 @@ namespace SequenceAnalysis
             return true;
         }
 
+        // Checks if the sequence is non-decreasing (monotonically increasing)
+        public static bool IsNonDecreasing(List<int> sequence)
+        {
+            for (int i = 1; i < sequence.Count; i++)
+            {
+                if (sequence[i] <= sequence[i - 1])
+                {
+                    return false;
+                }
+            }
+            return true;
+        }
+
         // Checks if the sequence is an arithmetic progression
         public static bool IsArithmeticProgression(List<int> sequence)
         {
@@ -87,6 +102,40 @@ namespace SequenceAnalysis
             return true;
         }
 
+        public List<string> GetTypeOfSequence()
+        {
+            List<string> types = new List<string>();
+            if (IsIncreasing(Numbers))
+            {
+                types.Add("Increasing");
+            }
+            if (IsDescending(Numbers))
+            {
+                types.Add("Decreasing");
+            }
+            if (IsNonIncreasing(Numbers))
+            {
+                types.Add("Non-Increasing");
+            }
+            if (IsNonDecreasing(Numbers))
+            {
+                types.Add("Non-Decreasing");
+            }
+            if (IsArithmeticProgression(Numbers))
+            {
+                types.Add("Arithmetic Progression");
+            }
+            if (IsGeometricProgression(Numbers))
+            {
+                types.Add("Geometric Progression");
+            }
+            else if (types.Count == 0)
+            {
+                types.Add("Unknown");
+            }
+            return types;
+        }
+
         // find max element
         public int Max()
         {
@@ -105,24 +154,98 @@ namespace SequenceAnalysis
             return Numbers.Contains(element);
         }
 
-        public bool CompareSequences(List<int> sequence_1, List<int> sequence_2)
+        // compares two sequences
+        public bool CompareSequences(Sequence sequence_2)
         {
-            return sequence_1 == sequence_2;
+            var firstNotSecond = Numbers.Except(sequence_2.Numbers).ToList();
+            var secondNotFirst = sequence_2.Numbers.Except(Numbers).ToList();
+            return !firstNotSecond.Any() && !secondNotFirst.Any();
         }
 
-        // split sequence to two subsequences
-        public static (List<int> FirstSubsequence, List<int> SecondSubsequence) SeparateSequence(List<int> sequence, int index)
+        public List<List<int>> GetLocalExtremes(bool maxima)
         {
-            if (index < 0 || index >= sequence.Count)
+            SubSequences.Clear(); // Clear previous subsequences
+
+            if (Numbers.Count < 3) // If the sequence is too short to have a local extreme
             {
-                throw new ArgumentOutOfRangeException(nameof(index), "Index must be within the sequence range.");
+                if (Numbers.Count > 0) // If there are elements, add them as a single subsequence
+                {
+                    SubSequences.Add(new List<int>(Numbers));
+                }
+                return SubSequences;
             }
 
-            // Using LINQ to partition the sequence
-            List<int> firstSubsequence = sequence.Take(index + 1).ToList();
-            List<int> secondSubsequence = sequence.Skip(index + 1).ToList();
+            List<int> currentSubSequence = new List<int> { Numbers[0] }; // Start with the first element
 
-            return (firstSubsequence, secondSubsequence);
+            for (int i = 1; i < Numbers.Count - 1; i++)
+            {
+                // Add the current number to the current subsequence
+                currentSubSequence.Add(Numbers[i]);
+
+                // Check for local maxima or minima
+                if ((maxima && Numbers[i] > Numbers[i - 1] && Numbers[i] > Numbers[i + 1]) ||
+                    (!maxima && Numbers[i] < Numbers[i - 1] && Numbers[i] < Numbers[i + 1]))
+                {
+                    // Since we're at a local extreme, also add the next element before splitting
+
+                    // Save the current subsequence to SubSequences
+                    SubSequences.Add(new List<int>(currentSubSequence));
+
+                    // Start a new subsequence with the element after the local extreme
+                    currentSubSequence = new List<int>();
+
+                    // If the next element is not the last one, add it to the new subsequence
+                    if (i + 1 < Numbers.Count)
+                    {
+                        currentSubSequence.Add(Numbers[i]);
+                    }
+                }
+            }
+
+            // Add the last element if it hasn't been included yet
+            if (!currentSubSequence.Contains(Numbers[^1]))
+            {
+                currentSubSequence.Add(Numbers[^1]);
+            }
+
+            // Ensure we don't add an empty subsequence
+            if (currentSubSequence.Count > 0)
+            {
+                SubSequences.Add(new List<int>(currentSubSequence));
+            }
+
+            return SubSequences;
+        }
+
+        public List<int> LargestSubsequence()
+        {
+            List<int> ints = new List<int>();
+            foreach (List<int> list in SubSequences)
+            {
+                ints.Add(list.Sum());
+            }
+
+            return SubSequences[ints.IndexOf(ints.Max())];
+        }
+
+        public void WriteSequence()
+        {
+            foreach (int num in Numbers)
+            {
+                Console.Write(num + " ");
+            }
+            Console.WriteLine();
+        }
+        public void WriteSubSequences()
+        {
+            foreach (List<int> subsequence in SubSequences)
+            {
+                foreach (int num in subsequence)
+                {
+                    Console.Write(num + " ");
+                }
+                Console.WriteLine();
+            }
         }
 
         // Serialization method
