@@ -39,27 +39,17 @@ Console.WriteLine();
 
 Console.WriteLine(sequence1.CompareSequences(sequence3));
 
-sequence4.GetLocalExtremes(true);
-
 Console.WriteLine("WRITE");
 sequence4.WriteSequence();
-sequence4.WriteSubSequences();
-Console.WriteLine();
-
-
 
 Console.WriteLine();
 
 sequence1.SaveToJson("C:\\Users\\Tima\\source\\repos\\C-sharp_labs\\hello.json");
 
-
-foreach (int num in sequence4.LargestSubsequence())
+foreach (int num in sequence4.LargestSubsequence(true))
 {
     Console.Write(num + " ");
 }
-Console.WriteLine();
-Console.WriteLine();
-
 
 Console.ReadKey();
 

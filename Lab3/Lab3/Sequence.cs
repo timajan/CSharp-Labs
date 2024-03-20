@@ -10,12 +10,10 @@ namespace SequenceAnalysis
     public class Sequence
     {
         public List<int> Numbers { get; set; }
-        public List<List<int>> SubSequences { get; set; }
 
         public Sequence(List<int> numbers)
         {
             Numbers = numbers;
-            SubSequences = new List<List<int>>();
         }
 
         // Checks if the sequence is strictly increasing
@@ -164,7 +162,7 @@ namespace SequenceAnalysis
 
         public List<List<int>> GetLocalExtremes(bool maxima)
         {
-            SubSequences.Clear(); // Clear previous subsequences
+            List<List<int>> SubSequences = new List<List<int>>();
 
             if (Numbers.Count < 3) // If the sequence is too short to have a local extreme
             {
@@ -186,9 +184,7 @@ namespace SequenceAnalysis
                 if ((maxima && Numbers[i] > Numbers[i - 1] && Numbers[i] > Numbers[i + 1]) ||
                     (!maxima && Numbers[i] < Numbers[i - 1] && Numbers[i] < Numbers[i + 1]))
                 {
-                    // Since we're at a local extreme, also add the next element before splitting
 
-                    // Save the current subsequence to SubSequences
                     SubSequences.Add(new List<int>(currentSubSequence));
 
                     // Start a new subsequence with the element after the local extreme
@@ -202,12 +198,6 @@ namespace SequenceAnalysis
                 }
             }
 
-            // Add the last element if it hasn't been included yet
-            if (!currentSubSequence.Contains(Numbers[^1]))
-            {
-                currentSubSequence.Add(Numbers[^1]);
-            }
-
             // Ensure we don't add an empty subsequence
             if (currentSubSequence.Count > 0)
             {
@@ -217,8 +207,9 @@ namespace SequenceAnalysis
             return SubSequences;
         }
 
-        public List<int> LargestSubsequence()
+        public List<int> LargestSubsequence(bool maxima)
         {
+            List<List<int>> SubSequences = GetLocalExtremes(maxima);
             List<int> ints = new List<int>();
             foreach (List<int> list in SubSequences)
             {
@@ -235,18 +226,6 @@ namespace SequenceAnalysis
                 Console.Write(num + " ");
             }
             Console.WriteLine();
-        }
-
-        public void WriteSubSequences()
-        {
-            foreach (List<int> subsequence in SubSequences)
-            {
-                foreach (int num in subsequence)
-                {
-                    Console.Write(num + " ");
-                }
-                Console.WriteLine();
-            }
         }
 
         // Serialization method
