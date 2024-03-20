@@ -19,7 +19,7 @@ namespace SequenceAnalysis
         }
 
         // Checks if the sequence is strictly increasing
-        public static bool IsIncreasing(List<int> sequence)
+        public bool IsIncreasing(List<int> sequence)
         {
             for (int i = 1; i < sequence.Count; i++)
             {
@@ -32,7 +32,7 @@ namespace SequenceAnalysis
         }
 
         // Checks if the sequence is strictly decreasing
-        public static bool IsDescending(List<int> sequence)
+        public bool IsDescending(List<int> sequence)
         {
             for (int i = 1; i < sequence.Count; i++)
             {
@@ -45,7 +45,7 @@ namespace SequenceAnalysis
         }
 
         // Checks if the sequence is non-increasing (monotonically decreasing)
-        public static bool IsNonIncreasing(List<int> sequence)
+        public bool IsNonIncreasing(List<int> sequence)
         {
             for (int i = 1; i < sequence.Count; i++)
             {
@@ -58,7 +58,7 @@ namespace SequenceAnalysis
         }
 
         // Checks if the sequence is non-decreasing (monotonically increasing)
-        public static bool IsNonDecreasing(List<int> sequence)
+        public bool IsNonDecreasing(List<int> sequence)
         {
             for (int i = 1; i < sequence.Count; i++)
             {
@@ -71,7 +71,7 @@ namespace SequenceAnalysis
         }
 
         // Checks if the sequence is an arithmetic progression
-        public static bool IsArithmeticProgression(List<int> sequence)
+        public bool IsArithmeticProgression(List<int> sequence)
         {
             if (sequence.Count < 2) return false;
 
@@ -87,7 +87,7 @@ namespace SequenceAnalysis
         }
 
         // Checks if the sequence is a geometric progression
-        public static bool IsGeometricProgression(List<int> sequence)
+        public bool IsGeometricProgression(List<int> sequence)
         {
             if (sequence.Count < 2 || sequence.Contains(0)) return false;
 
@@ -236,6 +236,7 @@ namespace SequenceAnalysis
             }
             Console.WriteLine();
         }
+
         public void WriteSubSequences()
         {
             foreach (List<int> subsequence in SubSequences)
