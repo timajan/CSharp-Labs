@@ -257,7 +257,7 @@ namespace SequenceAnalysis
         }
 
         // Deserialization method
-        public static Sequence LoadFromJson(string filePath)
+        public Sequence LoadFromJson(string filePath)
         {
             string json = File.ReadAllText(filePath);
             return JsonConvert.DeserializeObject<Sequence>(json);
