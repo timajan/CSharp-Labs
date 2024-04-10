@@ -1,64 +1,40 @@
 ﻿using Lab4;
+using System;
+using System.Collections.Generic;
+using System.Numerics;
 
-Continent continent1 = new Continent
+class Program
 {
-    Name = "Africa",
-    Area = 346723,
-    MaxHeight = 3427
-};
+    static void Main(string[] args)
+    {
+        // Creating a planet object with continents, oceans, and islands
+        Planet earth = new Planet("Earth", 123123, new List<Continent> {
+            new Continent("Asia", 5784, 2345),
+            new Continent("Africa", 5784, 2345),
+            new Continent("North America", 5784, 2345),
+            new Continent("South America", 5784, 2345),
+            new Continent("Antarctica", 5784, 2345),
+            new Continent("Europe", 5784, 2345),
+            new Continent("Australia", 5784, 2345)
+        }, new List<Ocean> {
+            new Ocean("Pacific Ocean", 5784, 2345),
+            new Ocean("Atlantic Ocean", 5784, 2345),
+            new Ocean("Indian Ocean", 5784, 2345),
+            new Ocean("Southern Ocean", 5784, 2345),
+            new Ocean("Arctic Ocean", 5784, 2345)
+        }, new List<Island> {
+            new Island("Greenland", 3453, 234, true),
+            new Island("New Guinea", 23423, 432, false),
+            new Island("Borneo", 23423, 432, false),
+            new Island("Madagascar", 23423, 432, false)
+        });
 
-Continent continent2 = new Continent
-{
-    Name = "America",
-    Area = 298031,
-    MaxHeight = 4155
-};
+        earth.PrintPlanet();
+        earth.PrintContinent();
+        earth.PrintCountContinents();
 
-Island island1 = new Island
-{
-    Name = "Madagascar",
-    Area = 53567,
-    MaxHeight = 690,
-    IsCountry = true
-};
+        Console.WriteLine(earth.ToString());
 
-Island island2 = new Island
-{
-    Name = "New Zealand",
-    Area = 17337,
-    MaxHeight = 2981,
-    IsCountry = true
-};
-
-Island island3 = new Island
-{
-    Name = "Isle of Man",
-    Area = 960,
-    MaxHeight = 359,
-    IsCountry = false
-};
-
-Ocean ocean1 = new Ocean
-{
-    Name = "Pacific Ocean",
-    Area = 9843902,
-    MaxDeep = 9430
-};
-
-Planet planet1 = new Planet
-{
-    Name = "Earth",
-    Radius = 4390,
-    Continents = new List<Continent> { continent1, continent2 },
-    Islands = new List<Island> { island1, island2, island3 },
-    Oceans = new List<Ocean> { ocean1 }
-};
-
-
-planet1.PrintPlanet();
-planet1.PrintContinent();
-planet1.PrintCountContinents();
-
-Console.WriteLine(planet1.ToString());
-
-Console.ReadLine();
+        Console.ReadLine();
+    }
+}

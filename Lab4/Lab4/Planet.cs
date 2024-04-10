@@ -6,67 +6,6 @@ using System.Threading.Tasks;
 
 namespace Lab4
 {
-
-    public class Continent
-    {
-        public string Name { get; set; }
-        public int Area { get; set; }
-        public int MaxHeight { get; set; }
-
-        public override string ToString()
-        {
-            return $"{Name}. Area: {Area}. Max height: {MaxHeight}";
-        }
-        public override bool Equals(object? obj)
-        {
-            if (obj is Continent continent)
-            {
-                return Name == continent.Name && Area == continent.Area && MaxHeight == continent.MaxHeight;
-            }
-            return false;
-        }
-        public override int GetHashCode()
-        {
-            return base.GetHashCode();
-        }
-    }
-
-    public class Island
-    {
-        public string Name { get; set; }
-        public int Area { get; set; }
-        public int MaxHeight { get; set; }
-        public bool IsCountry { get; set; }
-        public override string ToString()
-        {
-            return $"{Name}. Is country: {IsCountry}. Area: {Area}. Max height: {MaxHeight}";
-        }
-        public override bool Equals(object? obj)
-        {
-            if (obj is Island island)
-            {
-                return Name == island.Name && Area == island.Area && MaxHeight == island.MaxHeight && IsCountry == island.IsCountry;
-            }
-            return false;
-        }
-        public override int GetHashCode()
-        {
-            return base.GetHashCode();
-        }
-    }
-
-    public class Ocean
-    {
-        public string Name { get; set; }
-        public int Area { get; set; }
-        public int MaxDeep { get; set; }
-        public override string ToString()
-        {
-            return $"{Name}. Area: {Area}. Max deep: {MaxDeep}";
-        }
-
-    }
-
     public class Planet
     {
         public string Name { get; set; }
@@ -74,6 +13,15 @@ namespace Lab4
         public List<Continent> Continents { get; set; }
         public List<Island> Islands { get; set; }
         public List<Ocean> Oceans { get; set; }
+
+        public Planet(string name, int radius, List<Continent> continents, List<Ocean> oceans, List<Island> islands)
+        {
+            Name = name;
+            Radius = radius;
+            Continents = continents;
+            Oceans = oceans;
+            Islands = islands;
+        }
 
         public override string ToString()
         {
@@ -102,15 +50,11 @@ namespace Lab4
         }
         public void PrintContinent()
         {
-            foreach (var continent in Continents)
-            {
-                Console.Write(continent.Name + "  ");
-            }
-            Console.WriteLine();
+            Console.WriteLine(string.Join(", ", Continents.Select(x => x.Name)));
         }
         public void PrintCountContinents()
         {
-            Console.WriteLine(Continents.Count);
+            Console.WriteLine("Count of continents: " + Continents.Count);
         }
     }
 }

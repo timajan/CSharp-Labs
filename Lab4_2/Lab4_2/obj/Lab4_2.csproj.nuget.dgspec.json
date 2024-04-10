@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Tima\\source\\repos\\Lab4_2\\Lab4_2\\Lab4_2.csproj": {}
+    "C:\\Users\\Tima\\source\\repos\\C-sharp_labs\\Lab4_2\\Lab4_2\\Lab4_2.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Tima\\source\\repos\\Lab4_2\\Lab4_2\\Lab4_2.csproj": {
+    "C:\\Users\\Tima\\source\\repos\\C-sharp_labs\\Lab4_2\\Lab4_2\\Lab4_2.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Tima\\source\\repos\\Lab4_2\\Lab4_2\\Lab4_2.csproj",
+        "projectUniqueName": "C:\\Users\\Tima\\source\\repos\\C-sharp_labs\\Lab4_2\\Lab4_2\\Lab4_2.csproj",
         "projectName": "Lab4_2",
-        "projectPath": "C:\\Users\\Tima\\source\\repos\\Lab4_2\\Lab4_2\\Lab4_2.csproj",
+        "projectPath": "C:\\Users\\Tima\\source\\repos\\C-sharp_labs\\Lab4_2\\Lab4_2\\Lab4_2.csproj",
         "packagesPath": "C:\\Users\\Tima\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Tima\\source\\repos\\Lab4_2\\Lab4_2\\obj\\",
+        "outputPath": "C:\\Users\\Tima\\source\\repos\\C-sharp_labs\\Lab4_2\\Lab4_2\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\Tima\\AppData\\Roaming\\NuGet\\NuGet.Config",
